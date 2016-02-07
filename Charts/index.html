@@ -1,15 +1,68 @@
-﻿<!DOCTYPE html>
-
-<html lang="en">
+﻿<!<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8" />
-    <title>TypeScript HTML App</title>
-    <link rel="stylesheet" href="app.css" type="text/css" />
-    <script src="app.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.0.3.js"></script>
+
 </head>
 <body>
-    <h1>Charts Example</h1>
+    <div class="container">
+        <h3>Saxo OpenAPI - Chart Example - Streaming</h3>
+        <p>This example gets the most recent 100 chart points and then sets up a subscription to receive ongoing updates.</p>
+        <p>It is also possible to retrieve older samples in chunks of 1200 samples.</p>
+        <p>Prior to running this example, please go to the developer portal, log in and get a one day access token. Paste that into the field below and press [Set Token]:</p>
 
-    <div id="content"></div>
+        <div class="form-group">
+            <label for="accessToken">Access token:</label>
+            <textarea type="text" class="form-control" rows="3" id="accessToken"></textarea>
+            <button onclick="setAccessToken()">SetToken</button>
+        </div>
+
+        <h4>Get Chart Data</h4>
+        <form id="chartParams" class="form-inline">
+            <div>
+                <div class="form-group">
+                    <label for="assetType">AssetType:</label>
+                    <input type="text" id="assetType" name="assetType" value="FxSpot" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="uic">Uic:</label>
+                    <input type="text" id="uic" name="uic" value="21" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="horizon">Horizon:</label>
+                    <input type="text" id="horizon" name="horizon" value="1" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="timeZoneId">TimeZoneId:</label>
+                    <input type="text" id="timeZoneId" name="timeZoneId" value="0" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <a href="#" id="startStreamingBtn" onclick="startStreaming()" class="btn btn-primary">Start Streaming Connection</a>
+                    <a href="#" id="getCurrentChartBtn" onclick="getCurrentChart()" hidden class="btn btn-primary" style="display: none">Get Current Chart</a>
+                    <a href="#" id="getOlderSamplesBtn" onclick="getOlderSamples()" hidden class="btn btn-primary" style="display: none">Get Older Samples</a>
+                </div>
+            </div>
+        </form>
+        <div id="container" style="height: 700px; min-width: 310px"></div>
+        <div id="server-communication">
+            <b>Response:</b>
+            <br />
+            <code id="statusCode" class="request-url" data-bind="text: requestUrl"></code>
+            <div>
+                <pre id="responseBody" class="json request-body"></pre>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="openapiconfig.js"></script>
+    <script src="simplechartstreaming.js"></script>
 </body>
 </html>
