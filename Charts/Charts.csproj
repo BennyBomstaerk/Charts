@@ -22,12 +22,15 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="highchart.js" />
+    <TypeScriptCompile Include="highchart.ts" />
     <Content Include="index.html" />
     <TypeScriptCompile Include="globals.ts" />
+    <TypeScriptCompile Include="openapichart.ts" />
     <TypeScriptCompile Include="openapicommunication.ts" />
     <TypeScriptCompile Include="renderer.ts" />
-    <Content Include="simplechartstreaming.js" />
+    <TypeScriptCompile Include="Scripts\typings\highcharts\highcharts.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\highcharts\highstock.d.ts" />
+    <TypeScriptCompile Include="simplechartstreaming.ts" />
     <Content Include="web.config" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />

@@ -1,4 +1,25 @@
-﻿interface OpenApiCommunication {
+﻿interface OpenApiSubscriptionResponse {
+    ContextId: string,
+    Format: string,
+    InactivityTimeOut: string,
+    ReferenceId: string,
+    RefreshRate: number,
+    Snapshot: any,
+    State: string,
+    Tag:string
+}
+
+interface OpenApiStreamingResponse {
+    ReferenceId: string,
+    TimeStamp: string,  //TODO check this out also
+    Data?: any,
+    TargetReferenceIds?:string[],
+    __p?:number,
+    __n?:number
+}
+
+
+interface OpenApiCommunication {
     new (baseUrl: string, accessToken: string, renderer: Renderer): OpenApiCommunication;
 
     createStreamingConnection(receiveMessages: (messages: any) => void, calledOnConnect: () => void): void;
@@ -11,8 +32,10 @@
 
 
 
-var OpenApiCommunication:OpenApiCommunication=<ClassFunction> function (baseUrl: string, accessToken: string, renderer: Renderer) {
 
+
+var OpenApiCommunication:OpenApiCommunication=<ClassFunction> function (baseUrl: string, accessToken: string, renderer: Renderer) {
+    "use strict";
     var streamingConnectionUrl = baseUrl + "/streaming/connection";
     var streamingKeepAliveUrl = baseUrl + "/root/subscriptions/keepalive";
     var connection: SignalR;
@@ -26,7 +49,7 @@ var OpenApiCommunication:OpenApiCommunication=<ClassFunction> function (baseUrl:
     //Start of code relating to establishing and keeping alive the streaming connection
     //
     var
-    createStreamingConnection = function (receiveMessages:(messages:any)=>void, calledOnConnect:()=>void) {  //TODO:messages
+        createStreamingConnection = function (receiveMessages: (messages:OpenApiStreamingResponse[])=>void, calledOnConnect:()=>void) {  //TODO:messages
         var qs = createQueryString(accessToken);
         console.info("Initializing streaming uri to: " + streamingConnectionUrl);
         connection = $.connection(streamingConnectionUrl, qs, true);
@@ -80,13 +103,13 @@ var OpenApiCommunication:OpenApiCommunication=<ClassFunction> function (baseUrl:
                 return "unknown";
         }
     },
-    subscribe = function (refId:string, resUrl:string, refreshRate:number, arguments:any, processSnapshot:any)
+    subscribe = function (refId:string, resUrl:string, refreshRate:number, args:any, processSnapshot:(response:OpenApiSubscriptionResponse)=>void)
     {
         referenceId = refId;
         resourceUrl = resUrl;
 
         var requestData = {
-            Arguments: arguments,
+            Arguments: args,
             ContextId: contextId,
             ReferenceId: refId,
             RefreshRate:refreshRate
@@ -104,10 +127,10 @@ var OpenApiCommunication:OpenApiCommunication=<ClassFunction> function (baseUrl:
         });
     },
 
-    generateReferenceId = function (prefix:string) {
-        if ((null === prefix) || (typeof prefix === 'undefined')) {
-            prefix = "ex_";
-        }
+    generateReferenceId = function (prefix="yy_") {                //TODO check if this works!
+        //if ((null === prefix) || (typeof prefix === 'undefined')) {
+        //    prefix = "ex_";
+        //}
         return prefix + generateUniqueId();
     },
     generateUniqueId = function () {

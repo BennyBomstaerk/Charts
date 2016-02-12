@@ -1,7 +1,7 @@
-﻿/*
+/*
 * Setup chart component
 */
-function HighChart() {
+var HighChart = function () {
     Highcharts.setOptions({
         global: {
             useUTC: true
@@ -23,22 +23,23 @@ function HighChart() {
             floor: 0,
             offset: 50,
             plotLines: [{
-                value: 0,
-                width: 1,
-                color: 'blue',
-                dashStyle: 'dash'
-            }]
+                    value: 0,
+                    width: 1,
+                    color: 'blue',
+                    dashStyle: 'dash'
+                }]
         },
         exporting: {
             enabled: false
         },
         series: [{
-            data: [],
-            turboThreshold: 0,
-            dataGrouping: {
-                enabled: false
-            }
-        }]
+                data: [],
+                turboThreshold: 0,
+                dataGrouping: {
+                    enabled: false
+                }
+            }]
     };
     return new Highcharts.StockChart(chartOptions);
-}
+};
+//# sourceMappingURL=highchart.js.map

@@ -3,7 +3,8 @@
     showResponse(statusText: string, responseData: string):void;
 }
 
-var Renderer: Renderer = <ClassFunction> function (statusTextId: string, responseDataId: string) {
+var Renderer: Renderer = <ClassFunction>function (statusTextId: string, responseDataId: string) {
+    "use strict";
     var statusTextDiv = $(statusTextId),
         responseDataDiv = $(responseDataId),
 

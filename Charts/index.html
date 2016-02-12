@@ -42,10 +42,10 @@
                     <input type="text" id="timeZoneId" name="timeZoneId" value="0" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <a href="#" id="startStreamingBtn" onclick="startStreaming()" class="btn btn-primary">Start Streaming Connection</a>
-                    <a href="#" id="getCurrentChartBtn" onclick="getCurrentChart()" hidden class="btn btn-primary" style="display: none">Get Current Chart</a>
-                    <a href="#" id="getOlderSamplesBtn" onclick="getOlderSamples()" hidden class="btn btn-primary" style="display: none">Get Older Samples</a>
-                    <a href="#" id="testBtn" onclick="test()" class="btn btn-primary" >Test</a>
+                    <a href="#" id="startStreamingBtn" onclick="simpleChartStreaming.startStreaming()" class="btn btn-primary">Start Streaming Connection</a>
+                    <a href="#" id="getCurrentChartBtn" onclick="simpleChartStreaming.getCurrentChart()" hidden class="btn btn-primary" style="display: none">Get Current Chart</a>
+                    <a href="#" id="getOlderSamplesBtn" onclick="simpleChartStreaming.getOlderSamples()" hidden class="btn btn-primary" style="display: none">Get Older Samples</a>
+                    <a href="#" id="testBtn" onclick="simpleChartStreaming.test()" class="btn btn-primary" >Test</a>
                 </div>
             </div>
         </form>
@@ -65,7 +65,11 @@
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
     <script src="renderer.js"></script>
     <script src="openapicommunication.js"></script>
+    <script src="openapichart.js"></script>
     <script src="highchart.js"></script>
     <script src="simplechartstreaming.js"></script>
+    <script type="text/javascript">
+        var simpleChartStreaming = new SimpleChartStreaming();
+    </script>
 </body>
 </html>
