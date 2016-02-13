@@ -1,4 +1,5 @@
 ﻿module OpenApi {
+    "use strict";
     export interface OpenApiSubscriptionResponse {
         ContextId: string,
         Format: string,
@@ -25,7 +26,7 @@
 
         createStreamingConnection(receiveMessages: (messages: any) => void, calledOnConnect: () => void): void;
         connect(callBack: () => void): void;
-        subscribe(refId: string, resUrl: string, refreshRate: number, arguments: any, processSnapshot: any): void;
+        subscribe(refId: string, resUrl: string, refreshRate: number, args: any, processSnapshot: any): void;
         removeSubscription(refId: string, callback: () => void): void;
         generateReferenceId(prefix: string): string;
         callOpenApi(verb: string, url: string, data: any, callback: any): void;

@@ -1,5 +1,6 @@
 var OpenApiChartDemo;
 (function (OpenApiChartDemo) {
+    "use strict";
     var SimpleChartStreaming = (function () {
         function SimpleChartStreaming() {
             var _this = this;

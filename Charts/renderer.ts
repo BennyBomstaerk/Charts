@@ -1,4 +1,5 @@
 ﻿module OpenApi {
+    "use strict";
     export interface Renderer {
         new (statusTextId: string, responseDataId: string): Renderer;
         showResponse(statusText: string, responseData: string): void;

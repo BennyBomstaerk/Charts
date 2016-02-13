@@ -1,5 +1,5 @@
 ﻿module OpenApiChartDemo {
-
+    "use strict";
 
     export interface ChartInfo {
         DelayedByMinutes?: number,

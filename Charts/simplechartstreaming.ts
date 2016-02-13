@@ -1,4 +1,5 @@
 module OpenApiChartDemo {
+    "use strict";
     export class SimpleChartStreaming {
 
 
